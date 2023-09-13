@@ -93,7 +93,7 @@ function App() {
                     </Button>
                 </div>
 
-                <Panel className="sidepanel" style={{ height: '100%' }} header='Settings Panel'>
+                <Panel className="sidepanel" style={{ height: '100%' }} header='Settings Panel' >
                     <PanelBody title="Button Settings" initialOpen={true}>
                         <ToggleGroupControl
                             label="Select an Icon"
