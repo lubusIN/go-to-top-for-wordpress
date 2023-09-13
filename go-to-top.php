@@ -17,7 +17,6 @@ function g2t_admin_menu()
         'go-to-top',
         function () {
             echo '
-            <h2>Go To Top</h2>
             <div id="go-to-top"></div>
         ';
         },
