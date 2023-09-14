@@ -22,10 +22,9 @@ function App() {
   const [selectedIcon, setSelectedIcon] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('arrow-up-alt2');
   const [iconPosition, setIconPosition] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('center');
   const [iconPadding, setIconPadding] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('10px');
-  const [iconMargin, setIconMargin] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('10px');
   const [iconSize, setIconSize] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(24);
   const [borderRadius, setBorderRadius] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0);
-  const [buttonColor, setButtonColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)('#f00');
+  const [buttonColor, setButtonColor] = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)();
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(() => {
     switch (selectedIcon) {
       case 'arrow-up-alt2':
@@ -51,9 +50,6 @@ function App() {
   const handleIconPaddingChange = value => {
     setIconPadding(value + 'px');
   };
-  const handleIconMarginChange = value => {
-    setIconMargin(value + 'px');
-  };
   const handleIconSizeChange = value => {
     setIconSize(value);
   };
@@ -66,17 +62,17 @@ function App() {
   const getButtonStyle = () => {
     const style = {
       padding: iconPadding,
-      marginLeft: iconPosition === 'left' ? iconMargin : '',
-      marginRight: iconPosition === 'right' ? iconMargin : '',
       borderRadius: `${borderRadius}px`,
       fontSize: `${iconSize}px`,
       backgroundColor: buttonColor
     };
     return style;
   };
-  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Card, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, {
+  return (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)("div", {
+    className: "app-container"
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Card, null, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalHeading, {
     color: "black",
-    align: "center"
+    level: 1
   }, "Go-To-Top")), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.__experimentalGrid, {
     columns: 2,
     gap: 1,
@@ -91,9 +87,15 @@ function App() {
   }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
     label: "Go to Top",
     variant: "secondary",
-    icon: selectedIcon,
     style: getButtonStyle()
-  })), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, {
+  }, (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Icon, {
+    icon: selectedIcon,
+    size: iconSize,
+    style: {
+      maxWidth: '100%',
+      height: 'auto'
+    }
+  }))), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Panel, {
     className: "sidepanel",
     style: {
       height: '100%'
@@ -137,12 +139,6 @@ function App() {
     max: 50,
     value: parseInt(iconPadding),
     onChange: handleIconPaddingChange
-  }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
-    label: "Icon Margin",
-    min: 0,
-    max: 50,
-    value: parseInt(iconMargin),
-    onChange: handleIconMarginChange
   }), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_0__.createElement)(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
     label: "Icon Size",
     min: 1,

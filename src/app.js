@@ -4,20 +4,20 @@ import {
     Card,
     __experimentalHeading as Heading,
     __experimentalGrid as Grid,
-    Panel, PanelBody,
+    Panel, PanelBody, Icon,
     RangeControl, ColorPalette,
     __experimentalToggleGroupControlOption as ToggleGroupControlOption,
     __experimentalToggleGroupControl as ToggleGroupControl,
 } from "@wordpress/components";
 
+
 function App() {
     const [selectedIcon, setSelectedIcon] = useState('arrow-up-alt2');
     const [iconPosition, setIconPosition] = useState('center');
     const [iconPadding, setIconPadding] = useState('10px');
-    const [iconMargin, setIconMargin] = useState('10px');
     const [iconSize, setIconSize] = useState(24);
     const [borderRadius, setBorderRadius] = useState(0);
-    const [buttonColor, setButtonColor] = useState('#f00');
+    const [buttonColor, setButtonColor] = useState();
 
     useEffect(() => {
         switch (selectedIcon) {
@@ -48,10 +48,6 @@ function App() {
         setIconPadding(value + 'px');
     };
 
-    const handleIconMarginChange = (value) => {
-        setIconMargin(value + 'px');
-    };
-
     const handleIconSizeChange = (value) => {
         setIconSize(value);
     };
@@ -67,8 +63,6 @@ function App() {
     const getButtonStyle = () => {
         const style = {
             padding: iconPadding,
-            marginLeft: iconPosition === 'left' ? iconMargin : '',
-            marginRight: iconPosition === 'right' ? iconMargin : '',
             borderRadius: `${borderRadius}px`,
             fontSize: `${iconSize}px`,
             backgroundColor: buttonColor,
@@ -78,18 +72,22 @@ function App() {
     };
 
     return (
-        <div>
+        <div className='app-container'>
             <Card>
-                <Heading color="black" align='center'>Go-To-Top</Heading>
+                <Heading color="black" level={1}>Go-To-Top</Heading>
             </Card>
             <Grid columns={2} gap={1} templateColumns="3fr repeat(1,1fr)">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: iconPosition === 'center' ? 'center' : (iconPosition === 'left' ? 'flex-start' : 'flex-end'), height: '100vh' }}>
                     <Button
                         label="Go to Top"
                         variant="secondary"
-                        icon={selectedIcon}
                         style={getButtonStyle()}
                     >
+                        <Icon
+                            icon={selectedIcon}
+                            size={iconSize}
+                            style={{ maxWidth: '100%', height: 'auto' }}
+                        />
                     </Button>
                 </div>
 
@@ -144,13 +142,6 @@ function App() {
                             value={parseInt(iconPadding)}
                             onChange={handleIconPaddingChange}
                         />
-                        <RangeControl
-                            label="Icon Margin"
-                            min={0}
-                            max={50}
-                            value={parseInt(iconMargin)}
-                            onChange={handleIconMarginChange}
-                        />
 
                         <RangeControl
                             label="Icon Size"
@@ -192,7 +183,7 @@ function App() {
                     </PanelBody>
                 </Panel>
             </Grid>
-        </div >
+        </ div >
     );
 }
 
