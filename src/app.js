@@ -2,10 +2,13 @@ import React, { useState, useEffect } from 'react';
 import {
     Button,
     Card,
+    Panel, 
+    PanelBody, 
+    Icon,
+    RangeControl, 
+    ColorPalette,
     __experimentalHeading as Heading,
     __experimentalGrid as Grid,
-    Panel, PanelBody, Icon,
-    RangeControl, ColorPalette,
     __experimentalToggleGroupControlOption as ToggleGroupControlOption,
     __experimentalToggleGroupControl as ToggleGroupControl,
 } from "@wordpress/components";

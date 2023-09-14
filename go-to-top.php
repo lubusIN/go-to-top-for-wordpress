@@ -16,9 +16,7 @@ function g2t_admin_menu()
         'manage_options',
         'go-to-top',
         function () {
-            echo '
-            <div id="go-to-top"></div>
-        ';
+            echo '<div id="go-to-top"></div>';
         },
         'dashicons-arrow-up-alt2',
         2
@@ -29,7 +27,7 @@ add_action('admin_menu', 'g2t_admin_menu');
 
 function g2t_wp_admin_scripts($hook)
 {
-    // Load only on ?page=my-first-gutenberg-app.
+    // Load only on ?page=go-to-top
     if ('toplevel_page_go-to-top' !== $hook) {
         return;
     }
@@ -57,7 +55,7 @@ function g2t_wp_admin_scripts($hook)
     wp_register_style(
         'go-to-top',
         plugins_url('style.css', __FILE__),
-        array(),
+        [],
         $asset_file['version']
     );
     wp_enqueue_style('go-to-top');
