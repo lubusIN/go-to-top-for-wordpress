@@ -1,0 +1,20 @@
+{
+  "name": "go-to-top-for-wordpress",
+  "version": "1.0.0",
+  "description": "Plugin to add go to top button on WordPress Website",
+  "main": "index.js",
+  "scripts": {
+    "build": "wp-scripts build",
+    "format": "wp-scripts format",
+    "lint:js": "wp-scripts lint-js",
+    "packages-update": "wp-scripts packages-update",
+    "start": "wp-scripts start"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@wordpress/components": "^25.7.0",
+    "@wordpress/icons": "^9.32.0",
+    "@wordpress/scripts": "^26.12.0"
+  }
+}
