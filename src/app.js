@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import {
     Button,
     Card,
-    __experimentalHeading as Heading,
+    CardHeader,
+    Panel,
+    PanelBody,
+    Icon,
+    RangeControl,
+    ColorPalette,
     __experimentalGrid as Grid,
-    Panel, PanelBody, Icon,
-    RangeControl, ColorPalette,
+    __experimentalHeading as Heading,
+    __experimentalHStack as HStack,
     __experimentalToggleGroupControlOption as ToggleGroupControlOption,
     __experimentalToggleGroupControl as ToggleGroupControl,
 } from "@wordpress/components";
@@ -74,8 +79,16 @@ function App() {
     return (
         <div className='app-container'>
             <Card>
-                <Heading color="black" level={1}>Go-To-Top</Heading>
+                <CardHeader>
+                    <HStack alignment='left'>
+                        <Icon icon={'arrow-up-alt2'} />
+                        <Heading>
+                            Go To Top
+                        </Heading>
+                    </HStack>
+                </CardHeader>
             </Card>
+
             <Grid columns={2} gap={1} templateColumns="3fr repeat(1,1fr)">
                 <div style={{ display: 'flex', alignItems: 'center', justifyContent: iconPosition === 'center' ? 'center' : (iconPosition === 'left' ? 'flex-start' : 'flex-end'), height: '100vh' }}>
                     <Button
