@@ -5,60 +5,14 @@
  * Update URI:  lubus-go-to-top
  */
 
-//g2t
+// admin menu setup
+require_once plugin_dir_path(__FILE__) . 'inc/admin-menu.php';
 
-function g2t_admin_menu()
-{
-    // Create a new admin page for our app.
-    add_menu_page(
-        __('Go To Top', 'gototop'),
-        __('Go To Top', 'gototop'),
-        'manage_options',
-        'go-to-top',
-        function () {
-            echo '<div id="go-to-top"></div>';
-        },
-        'dashicons-arrow-up-alt2',
-        2
-    );
-}
+// load the scripts
+require_once plugin_dir_path(__FILE__) . 'inc/enqueue-scripts.php';
 
-add_action('admin_menu', 'g2t_admin_menu');
+// REST API settings registration
+require_once plugin_dir_path(__FILE__) . 'inc/rest-settings.php';
 
-function g2t_wp_admin_scripts($hook)
-{
-    // Load only on ?page=go-to-top
-    if ('toplevel_page_go-to-top' !== $hook) {
-        return;
-    }
-
-    // Load the required WordPress packages.
-
-    // Automatically load imported dependencies and assets version.
-    $asset_file = include plugin_dir_path(__FILE__) . 'build/index.asset.php';
-
-    // Enqueue CSS dependencies.
-    foreach ($asset_file['dependencies'] as $style) {
-        wp_enqueue_style($style);
-    }
-
-    // Load our app.js.
-    wp_register_script(
-        'go-to-top',
-        plugins_url('build/index.js', __FILE__),
-        $asset_file['dependencies'],
-        $asset_file['version']
-    );
-    wp_enqueue_script('go-to-top');
-
-    // Load our style.css.
-    wp_register_style(
-        'go-to-top',
-        plugins_url('style.css', __FILE__),
-        [],
-        $asset_file['version']
-    );
-    wp_enqueue_style('go-to-top');
-}
-
-add_action('admin_enqueue_scripts', 'g2t_wp_admin_scripts');
+// load functions.php
+require_once plugin_dir_path(__FILE__) . 'inc/functions.php';
