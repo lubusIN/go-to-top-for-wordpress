@@ -1,200 +1,46 @@
-import React, { useState, useEffect } from 'react';
+/**
+ * WordPress dependencies.
+ */
+import { __ } from '@wordpress/i18n';
+import { Panel, __experimentalGrid as Grid } from "@wordpress/components";
+
+/**
+ * Internal Dependencies
+ */
+import { Header, PreviewButton, SaveNotice } from './component';
+import { useSavedSettings } from './data';
 import {
-    Button,
-    Card,
-    Panel, 
-    PanelBody, 
-    Icon,
-    RangeControl, 
-    ColorPalette,
-    __experimentalHeading as Heading,
-    __experimentalGrid as Grid,
-    __experimentalToggleGroupControlOption as ToggleGroupControlOption,
-    __experimentalToggleGroupControl as ToggleGroupControl,
-} from "@wordpress/components";
+    AdvancedControl,
+    BorderControl,
+    ColorControl,
+    DimensionControl,
+    GeneralControl,
+    ResponsiveControl
+} from './control'
 
-
+/**
+ * Render App
+ */
 function App() {
-    const [selectedIcon, setSelectedIcon] = useState('arrow-up-alt2');
-    const [iconPosition, setIconPosition] = useState('center');
-    const [iconPadding, setIconPadding] = useState('10px');
-    const [iconSize, setIconSize] = useState(24);
-    const [borderRadius, setBorderRadius] = useState(0);
-    const [buttonColor, setButtonColor] = useState();
 
-    useEffect(() => {
-        switch (selectedIcon) {
-            case 'arrow-up-alt2':
-                setIconSize(24);
-                break;
-            case 'arrow-down-alt2':
-                setIconSize(32);
-                break;
-            case 'arrow-left-alt2':
-            case 'arrow-right-alt2':
-                setIconSize(28);
-                break;
-            default:
-                setIconSize(24);
-        }
-    }, [selectedIcon]);
-
-    const handleIconChange = (value) => {
-        setSelectedIcon(value);
-    };
-
-    const handleIconPositionChange = (value) => {
-        setIconPosition(value);
-    };
-
-    const handleIconPaddingChange = (value) => {
-        setIconPadding(value + 'px');
-    };
-
-    const handleIconSizeChange = (value) => {
-        setIconSize(value);
-    };
-
-    const handleColorChange = (color) => {
-        setButtonColor(color);
-    };
-
-    const handleBorderRadiusChange = (value) => {
-        setBorderRadius(value);
-    };
-
-    const getButtonStyle = () => {
-        const style = {
-            padding: iconPadding,
-            borderRadius: `${borderRadius}px`,
-            fontSize: `${iconSize}px`,
-            backgroundColor: buttonColor,
-        };
-
-        return style;
-    };
+    useSavedSettings();
 
     return (
-        <div className='app-container'>
-            <Card>
-                <CardHeader>
-                    <HStack alignment='left'>
-                        <Icon icon={'arrow-up-alt2'} />
-                        <Heading>
-                            Go To Top
-                        </Heading>
-                    </HStack>
-                </CardHeader>
-            </Card>
-
-            <Grid columns={2} gap={1} templateColumns="3fr repeat(1,1fr)">
-                <div style={{ display: 'flex', alignItems: 'center', justifyContent: iconPosition === 'center' ? 'center' : (iconPosition === 'left' ? 'flex-start' : 'flex-end'), height: '100vh' }}>
-                    <Button
-                        label="Go to Top"
-                        variant="secondary"
-                        style={getButtonStyle()}
-                    >
-                        <Icon
-                            icon={selectedIcon}
-                            size={iconSize}
-                            style={{ maxWidth: '100%', height: 'auto' }}
-                        />
-                    </Button>
-                </div>
-
-                <Panel className="sidepanel" style={{ height: '100%' }} header='Settings Panel' >
-                    <PanelBody title="Button Settings" initialOpen={true}>
-                        <ToggleGroupControl
-                            label="Select an Icon"
-                            selected={selectedIcon}
-                            onChange={handleIconChange}
-                        >
-                            <ToggleGroupControlOption
-                                label="Up"
-                                value={'arrow-up-alt2'}
-                            />
-                            <ToggleGroupControlOption
-                                label="Down"
-                                value={'arrow-down-alt2'}
-                            />
-                            <ToggleGroupControlOption
-                                label="Left"
-                                value={'arrow-left-alt2'}
-                            />
-                            <ToggleGroupControlOption
-                                label="Right"
-                                value={'arrow-right-alt2'}
-                            />
-                        </ToggleGroupControl>
-
-                        <ToggleGroupControl
-                            label="Icon Position"
-                            selected={iconPosition}
-                            onChange={handleIconPositionChange}
-                        >
-                            <ToggleGroupControlOption
-                                label="Center"
-                                value="center"
-                            />
-                            <ToggleGroupControlOption
-                                label="Left"
-                                value="left"
-                            />
-                            <ToggleGroupControlOption
-                                label="Right"
-                                value="right"
-                            />
-                        </ToggleGroupControl>
-
-                        <RangeControl
-                            label="Icon Padding"
-                            min={0}
-                            max={50}
-                            value={parseInt(iconPadding)}
-                            onChange={handleIconPaddingChange}
-                        />
-
-                        <RangeControl
-                            label="Icon Size"
-                            min={1}
-                            max={100}
-                            value={iconSize}
-                            onChange={handleIconSizeChange}
-                        />
-                    </PanelBody>
-                    <PanelBody title="Color Settings">
-                        <ColorPalette
-                            colors={[
-                                {
-                                    color: '#f00',
-                                    name: 'Red'
-                                },
-                                {
-                                    color: '#fff',
-                                    name: 'White'
-                                },
-                                {
-                                    color: '#00f',
-                                    name: 'Blue'
-                                }
-                            ]}
-                            label="Button Color"
-                            value={buttonColor}
-                            onChange={handleColorChange}
-                        />
-                    </PanelBody>
-                    <PanelBody title="Border Settings">
-                        <RangeControl
-                            label="Border Radius"
-                            min={0}
-                            max={50}
-                            value={borderRadius}
-                            onChange={handleBorderRadiusChange}
-                        />
-                    </PanelBody>
+        <div className='ls_g2t_container'>
+            <Header />
+            <Grid className="ls_g2t_section" columns={2} templateColumns="3fr repeat(1,1fr)">
+                <PreviewButton />
+                <Panel className="ls_g2t_sidepanel" header={__('Settings Panel')} >
+                    <GeneralControl />
+                    <DimensionControl />
+                    <ColorControl />
+                    <BorderControl />
+                    <AdvancedControl />
+                    <ResponsiveControl />
                 </Panel>
             </Grid>
-        </ div >
+            <SaveNotice />
+        </div>
     );
 }
 
