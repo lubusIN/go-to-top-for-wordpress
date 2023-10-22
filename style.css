@@ -19,6 +19,7 @@
 .ls_g2t_section {
     overflow: auto;
     overscroll-behavior-y: none;
+    height: 100%;
 }
 
 .ls_g2t_sidepanel {
@@ -59,4 +60,8 @@
     position: fixed;
     bottom: 2rem;
     left: 180px;
+}
+
+#wpfooter {
+    display: none;
 }
