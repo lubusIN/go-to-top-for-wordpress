@@ -44,4 +44,4 @@ npm run build
 
 ## License
 
-`Go To Top For WordPress` is an open-source software licensed under the [MIT](LICENSE)
+`Go To Top` is an open-source software licensed under the [MIT](LICENSE)
