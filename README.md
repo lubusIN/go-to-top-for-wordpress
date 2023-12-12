@@ -1,4 +1,4 @@
-# Goto Top For WordPress
+# Go to Top For WordPress
 Experimental WordPress plugin to add go to top button on frontend with setting panel to personalize.
 
 <img src =".github/screenshot.png" alt="Plugin Settings Panel">
