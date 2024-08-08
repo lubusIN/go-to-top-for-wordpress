@@ -48,7 +48,7 @@ function GeneralControl() {
                 value={generalSetting.buttonPosition}
                 onChange={(value) => setGeneralSetting({ ...generalSetting, buttonPosition: value })}
             >
-                {['Center', 'Left', 'Right'].map((position) => (
+                {['Left', 'Center', 'Right'].map((position) => (
                     <ToggleGroupControlOption
                         key={position}
                         label={position}
