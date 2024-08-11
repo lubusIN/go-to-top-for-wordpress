@@ -30,7 +30,7 @@ function App() {
             <Header />
             <Grid className="ls_g2t_section" columns={2} templateColumns="3fr repeat(1,1fr)">
                 <PreviewButton />
-                <Panel className="ls_g2t_sidepanel" header={__('Settings Panel')} >
+                <Panel className="ls_g2t_sidepanel">
                     <GeneralControl />
                     <DimensionControl />
                     <ColorControl />
