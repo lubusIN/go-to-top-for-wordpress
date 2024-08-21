@@ -7,12 +7,7 @@ function ls_g2t_settings()
 
     // Extract settings for better readability
     $enabled     = $settings['enabled'];
-    $general     = $settings['generalSetting'];
-    $dimension   = $settings['dimensionSetting'];
-    $color       = $settings['colorSetting'];
-    $border      = $settings['borderSetting'];
     $advanced    = $settings['advancedSetting'];
-    $responsive  = $settings['responsive'];
 
     if (!$enabled) {
         return;
@@ -37,29 +32,44 @@ function ls_g2t_settings()
     <style>
         {$styles}
     </style>
-HTML;
-?>
-    <script>
+ <script>
         jQuery(document).ready(function($) {
-            var animationSpeed = <?php echo $animationSpeed; ?>;
-            $('.ls_g2top_icon').click(function() {
-                $('html,body').animate({
-                    scrollTop: 0
-                }, animationSpeed);
+            var animationSpeed = $animationSpeed;
+            var scrollOffset = $scrollOffset;
+
+            function toggleIconVisibility() {
+                var windowWidth = $(window).width();
+                var iconVisible = false;
+
+                if (windowWidth <= 480) {
+                    iconVisible = $('.ls_g2top_icon').css('display') !== 'none';
+                } else if (windowWidth <= 819) {
+                    iconVisible = $('.ls_g2top_icon').css('display') !== 'none';
+                } else {
+                    iconVisible = $('.ls_g2top_icon').css('display') !== 'none';
+                }
+
+                if (iconVisible) {
+                    $(window).on('scroll', function() {
+                        if ($(this).scrollTop() >= scrollOffset) {
+                            $('.ls_g2top_icon').fadeIn(300);
+                        } else {
+                            $('.ls_g2top_icon').fadeOut(300);
+                        }
+                    });
+                }
+            }
+
+            toggleIconVisibility(); // Initial check
+            $(window).resize(toggleIconVisibility); // Recheck on window resize
+
+            $('.ls_g2top_icon').on('click', function() {
+                $('html, body').animate({scrollTop: 0}, animationSpeed);
                 return false;
             });
-            $(window).scroll(function() {
-                var scrollOffset = <?php echo $scrollOffset; ?>;
-                var scroll = $(window).scrollTop();
-                if (scroll >= scrollOffset) {
-                    $('.ls_g2top_icon').show(300);
-                } else {
-                    $('.ls_g2top_icon').hide(300);
-                }
-            });
-        })
+        });
     </script>
-<?php
+HTML;
 }
 
 // Generate icon
@@ -145,4 +155,17 @@ function ls_g2t_styles($settings)
         }
     CSS;
 }
-?>
+
+function ls_g2t_enqueue_scripts()
+{
+    wp_enqueue_script('jquery', 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js');
+
+    // Load style.css.
+    wp_register_style(
+        'go-to-top-frontend',
+        plugins_url('style.css', WGTT_PLUGIN_FILE),
+        [],
+    );
+    wp_enqueue_style('go-to-top-frontend');
+}
+add_action('wp_enqueue_scripts', 'ls_g2t_enqueue_scripts');
