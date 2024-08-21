@@ -1,0 +1,9 @@
+{
+    "name": "lubus/go-to-top",
+    "description": "Add a smooth 'Go to Top' button for quick page scrolling",
+    "autoload": {
+        "classmap": [
+            "inc/"
+        ]
+    }
+}
