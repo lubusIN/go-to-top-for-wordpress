@@ -62,7 +62,7 @@ class Enqueue_Scripts
 
         // Load the asset file containing dependencies and version information.
         $asset_file = array(
-            'dependencies' => [],
+            'dependencies' => ['wp-api-fetch'],
             'version'      => '1.0.0',
         );
 
