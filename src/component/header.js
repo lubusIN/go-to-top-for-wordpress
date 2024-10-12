@@ -77,7 +77,7 @@ function Header() {
                     </HStack>
                     <HStack>
                         <HStack justify='right'>
-                            <Text>Enable</Text>
+                            <Text>{enabled ? 'Enabled' : 'Disabled'}</Text>
                             <ToggleControl
                                 __nextHasNoMarginBottom
                                 checked={enabled}
