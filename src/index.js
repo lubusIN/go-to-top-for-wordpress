@@ -1,16 +1,23 @@
-import { render } from '@wordpress/element';
-import App from './app';
-import SettingsProvider from './data/context';
+/**
+ * WordPress dependencies.
+ */
+import { createRoot } from 'react-dom/client';
+import domReady from '@wordpress/dom-ready';
+import '@wordpress/components/build-style/style.css';
 
-window.addEventListener(
-    'load',
-    function () {
-        render(
-            <SettingsProvider>
-                <App />
-            </SettingsProvider>,
-            document.querySelector('#go-to-top'),
-        );
-    },
-    false
-);
+/**
+ * Internal dependencies.
+ */
+import SettingsProvider from './data/context';
+import App from './app';
+import './app.scss'
+
+domReady(function () {
+    const container = document.querySelector('#go-to-top');
+    const root = createRoot(container);
+    root.render(
+        <SettingsProvider>
+            <App />
+        </SettingsProvider>
+    );
+});

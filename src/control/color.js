@@ -10,6 +10,7 @@ import {
     __experimentalZStack as ZStack,
     __experimentalHStack as HStack,
     __experimentalToolsPanel as ToolsPanel,
+    __experimentalText as Text,
     __experimentalToolsPanelItem as ToolsPanelItem,
     ColorPalette,
 } from '@wordpress/components';
@@ -39,7 +40,7 @@ function ColorControlDropdown({ label, colorValue, onChangeColor }) {
                             <ColorIndicator colorValue={colorValue['default']} />
                             <ColorIndicator colorValue={colorValue['hover']} />
                         </ZStack>
-                        <text>{label}</text>
+                        <Text>{label}</Text>
                     </HStack>
                 </Button>
             )}
